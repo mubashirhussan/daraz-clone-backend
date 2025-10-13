@@ -1,0 +1,4 @@
+
+{
+  "prettier/prettier": ["error", { "endOfLine": "off" }]
+}
