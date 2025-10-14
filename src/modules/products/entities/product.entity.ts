@@ -1,16 +1,26 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Order } from "src/modules/orders/entities/order.entity";
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity("products")
+@Entity()
 export class Product {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: string;
+  title: string;
+
+  @Column()
+  description: string;
 
   @Column("decimal", { precision: 10, scale: 2 })
   price: number;
 
-  @Column({ type: "text", nullable: true })
-  description: string;
+  @Column({ default: 0 })
+  stock: number;
+
+  @Column({ nullable: true })
+  image: string;
+
+  @ManyToMany(() => Order, (order) => order.products)
+  orders: Order[];
 }
